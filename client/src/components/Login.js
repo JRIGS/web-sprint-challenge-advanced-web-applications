@@ -1,6 +1,16 @@
 import React, { useState } from "react";
 import {useHistory} from 'react-router-dom'
 import {axiosWithAuth} from '../util/axiosWithAuth'
+import Styled from 'styled-components'
+
+const LoginFormContainer = Styled.div`
+border: 20px solid black;
+
+`
+const LoginFormTitle = Styled.h1`
+border: 20px solid black;
+color:red;
+`
 
 const loginInfo = {
   username: 'Lambda School',
@@ -34,28 +44,30 @@ const Login = () => {
 
   return (
     
+    <LoginFormContainer>
+
     <form onSubmit={submitHandler}>
 
-    <h1>Welcome to the Bubble App!</h1>
+    <LoginFormTitle>Welcome to the Bubble App!</LoginFormTitle>
 
     <input
       name='username'
       type='text'
       value={creds.username}
       onChange={changeHandler}
-    />
+      />
 
     <input
       name='password'
       type='password'
       value={creds.password}
       onChange={changeHandler}
-    />
+      />
 
     <button >Login</button>
 
   </form>
-
+  </LoginFormContainer>
   );
 };
 
