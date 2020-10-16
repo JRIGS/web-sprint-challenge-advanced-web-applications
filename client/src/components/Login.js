@@ -2,11 +2,16 @@ import React, { useState } from "react";
 import {useHistory} from 'react-router-dom'
 import {axiosWithAuth} from '../util/axiosWithAuth'
 
+const loginInfo = {
+  username: 'Lambda School',
+  password: 'i<3Lambd4'
+}
+
 const Login = () => {
   
   const { push } = useHistory();
   
-  const [creds, setCreds] = useState({ username: '', password: ''})
+  const [creds, setCreds] = useState(loginInfo)
   
   const changeHandler = e => {
     setCreds({ ...creds, [e.target.name]: e.target.value})
@@ -15,10 +20,11 @@ const Login = () => {
   const submitHandler = e => {
     e.preventDefault();
     // make a post request to retrieve a token from the api
-    axiosWithAuth().post('/api/login', creds)
+    axiosWithAuth()
+    .post('/api/login', creds)
     .then(res => {
       // when you have handled the token 
-      localStorage.getItem('token', res.data.payload);
+      localStorage.setItem('token', res.data.payload);
       // navigate to the BubblePage route
       push('/bubbles')
     })
@@ -46,7 +52,7 @@ const Login = () => {
       onChange={changeHandler}
     />
 
-    <button>Login</button>
+    <button >Login</button>
 
   </form>
 
